@@ -1,0 +1,56 @@
+---
+  trainer: trainer.DatasetKernelGANTrainer
+  data:
+    data_train: 'DIV2K'
+    data_test: null
+    preprocess: true
+    kernelgan_crop:
+      train: true
+      test: true
+      scale_crop: false
+  train:
+    test_only: false
+    patch_size: 192 # output patch size
+    save_results: false
+    scale: 2
+  model: 
+    downsampling:
+      model_name: downsampling
+      model_args: 
+        kernel_size: 11
+      optim_args:
+        opt: sgd
+        lr: 0.01
+        opt_args: null
+        lr_decay: null
+    discriminator:
+      model_name: discriminator
+      model_args: null
+      optim_args:
+        opt: sgd
+        lr: 0.2
+        opt_args: null
+        lr_decay: null
+  degradation_operations:
+    train:
+      kernel:
+        lb: 0.35
+        ub: 5.0
+        ksize: 11
+    test: null
+  optim:
+    bicubic_loss: false
+    kernelgan_reg:
+      - 0.5 
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    steps: 100000
+    task_batch_size: 1
+    lsgan_loss: 
+      dis_input_patch_size: 32
+      noise: true
+    kernel_loss: 1.0
+    gt_son_loss: false
+    save_every: 10000 # save model every x steps

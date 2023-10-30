@@ -1,0 +1,67 @@
+---
+  trainer: trainer.MetaKernelGANTrainer
+  data:
+    data_train: 'DIV2K'
+    data_test: null
+    preprocess: true
+    kernelgan_crop:
+      train: true
+      test: true
+      scale_crop: false
+  train:
+    test_only: false
+    patch_size: 192 # output patch size
+    save_results: false
+    scale: 2
+  model: 
+    downsampling:
+      model_name: downsampling
+      model_args: 
+        kernel_size: 11
+      optim_args:
+        meta_algorithm: maml
+        task_opt: sgd
+        task_lr: 0.01
+        task_lr_decay: null
+        first_order: true
+        task_adapt_steps: 25
+    discriminator:
+      model_name: discriminator
+      model_args: null
+      optim_args:
+        meta_algorithm: maml
+        task_opt: sgd
+        task_lr: 0.2
+        task_lr_decay: null
+        first_order: true
+  degradation_operations:
+    train:
+      kernel:
+        lb: 0.35
+        ub: 5.0
+        ksize: 11
+    test: null
+  optim:
+    bicubic_loss: false
+    kernelgan_reg:
+      - 0.5 
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    meta_steps: 100000
+    meta_lr: 0.0001
+    task_batch_size: 1
+    lsgan_loss: 
+      dis_input_patch_size: 32
+      noise: true
+    kernel_loss: 1.0
+    gt_son_loss: false
+    outer_lsgan_loss: true
+    save_every: 10000 # save model every x meta_steps
+    validate_steps:
+      - 5
+      - 10
+      - 15
+      - 20
+      - 25

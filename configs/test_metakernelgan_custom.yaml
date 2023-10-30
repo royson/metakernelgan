@@ -1,0 +1,20 @@
+---
+  model: 
+    downsampling:
+      optim_args:
+        task_lr_decay: 
+          - 50
+          - 200
+  data:
+    real: true
+    data_test: null
+    custom_data_path: '/datasets/super_res/custom/'
+  optim:
+    evaluation_task_steps: 
+      - 0
+      - 200
+  train:
+    test_only: true
+    save_results: true
+    evaluate_non_blind:
+      model: 'usrnet'

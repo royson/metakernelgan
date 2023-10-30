@@ -1,0 +1,25 @@
+---
+  model: 
+    downsampling:
+      optim_args:
+        task_lr_decay: 
+          - 50
+          - 200
+  data:
+    test_only_images:
+      - '0812.png'
+    data_test:
+      - DIV2K
+  degradation_operations: 
+    test: 
+      - name: 'kernelganfkp_kernels_x2_clean'
+        lr_folder: KernelGANFKP_lr_x2_clean
+        kernel:
+          kernel_folder: KernelGANFKP_gt_k_x2_clean
+  optim:
+    evaluation_task_steps: null
+  train:
+    save_results: true
+    test_only: true
+    evaluate_non_blind:
+      model: usrnet

@@ -1,0 +1,77 @@
+data:
+  data_dir: /datasets/super_res
+  data_test: null
+  data_train: DIV2K
+  kernelgan_crop:
+    scale_crop: false
+    test: true
+    train: true
+  n_threads: 8
+  preprocess: true
+degradation_operations:
+  test: null
+  train:
+    kernel:
+      ksize: 11
+      lb: 0.35
+      ub: 5.0
+load_model: latest
+model:
+  discriminator:
+    model_args: null
+    model_name: discriminator
+    optim_args:
+      first_order: true
+      meta_algorithm: maml
+      task_adapt_steps: 25
+      task_lr: 0.2
+      task_lr_decay: null
+      task_opt: sgd
+  downsampling:
+    model_args:
+      kernel_size: 11
+    model_name: downsampling
+    optim_args:
+      first_order: true
+      meta_algorithm: maml
+      task_adapt_steps: 25
+      task_lr: 0.01
+      task_lr_decay: null
+      task_opt: sgd
+name: metakernelgan
+optim:
+  bicubic_loss: false
+  gt_son_loss: false
+  kernel_loss: 1.0
+  kernelgan_reg:
+  - 0.5
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  lsgan_loss:
+    dis_input_patch_size: 32
+    noise: true
+  meta_batch_size: 1
+  meta_lr: 0.0001
+  meta_steps: 100000
+  outer_lsgan_loss: true
+  save_every: 10000
+  task_batch_size: 1
+  test_every: null
+  validate_steps:
+  - 5
+  - 10
+  - 15
+  - 20
+  - 25
+sys:
+  cpu: false
+  log: true
+  seed: 1
+train:
+  patch_size: 192
+  save_kernels: false
+  save_results: false
+  scale: 2
+  test_only: false

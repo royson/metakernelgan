@@ -1,0 +1,25 @@
+---
+  trainer: trainer.MetaKernelGANTrainer
+  home_dir: '.'
+  reset: false
+  resume: false
+  debug: false
+  run: true
+  load: null
+  load_model: 'latest'
+  data:
+    data_dir: '../dataset'
+    data_test: null
+    custom_data_path: null
+    n_threads: 8
+    preprocess: true
+  train:
+    chop: false
+    scale: 2
+    save_results: false
+    save_kernels: false
+    test_only: false
+  sys:
+    log: true
+    seed: 1
+    cpu: true    

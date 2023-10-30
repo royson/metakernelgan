@@ -1,0 +1,34 @@
+---
+  model: 
+    downsampling:
+      optim_args:
+        task_lr_decay: 
+          - 50
+          - 200
+  data:
+    data_test:
+      - Set14
+      - B100
+      - Urban100
+      - DIV2K
+  degradation_operations: 
+    test: 
+      - name: 'kernelganfkp_kernels_x2_clean'
+        lr_folder: KernelGANFKP_lr_x2_clean
+        kernel:
+          kernel_folder: KernelGANFKP_gt_k_x2_clean
+  optim:
+    evaluation_task_steps: 
+      - 0
+      - 1
+      - 5
+      - 10 
+      - 20
+      - 25
+      - 50
+      - 100
+      - 200
+  train:
+    test_only: true
+    evaluate_non_blind:
+      model: usrnet
