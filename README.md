@@ -1,4 +1,4 @@
-# MetaKernelGAN
+# Meta-Learned Kernel For Blind Super-Resolution Kernel Estimation
 
 ## Tested on
 
